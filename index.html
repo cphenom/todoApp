@@ -7,15 +7,25 @@
     <script defer src="js/main.js"></script>
     <link rel="icon" type="image/svg" sizes="32x32" href="assests/favicon/icon-arrow.svg">
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/48b64b4e60.js" crossorigin="anonymous"></script>
     <title>Todo App</title>
 </head>
 <body>
-    <main class="mainsection">
+    <menu class="menu">
+        <div class="sitename"><h3>TODO APP</h3></div>
+        <button id="menucreate">Create Todos</button>
+        <button id="menumanage">Manage Todos</button>
+    </menu>
+    <main class="mainsection visible" id="createtodos">
         <div class="create">
             <div class="form">
                 <h2>Create Todos</h2>
-                <input type="text" placeholder="Enter your name">
-                <textarea name="textarea" id="textarea" cols="10" rows="5" placeholder="Write Todo"></textarea>
+                <div>
+                    <input type="text" placeholder="Enter your First Name" maxlength="12" id="firstname">
+                    <input type="text" placeholder="Enter your Last Name" maxlength="12" id="lastname">
+                </div>
+                
+                <textarea name="textarea" id="textarea" cols="10" rows="5" placeholder="Write TODO, Character length must not be more than 120 Characters meanwhile you can create multiple TODOs" maxlength="130"></textarea>
                 <div id="buttondiv">
                     <button id="submit">Submit</button>
                 </div>
@@ -31,7 +41,45 @@
         </section>
     </main>
     
-<div class="displaytodos" id="displaytodos">displaytodos</div>
+    <div class="displaytodos" id="displaytodos">
+        <div class="todowindow">
+            <div class="toolbar">
+                <div class="complete">
+                    <input type="checkbox" id="completed">
+                </div>
+                
+                <button>
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <button>
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+            <div class="marked" id="marked">
+                <i class="fa-solid fa-circle-check"></i><div class="font10">DONE</div>
+            </div>
+            
+            <textarea class="textdisplay" readonly >
+                i started prograaming in 2993 but now an not going where i can do better but you know i am the best in town so come lets1234567890
+            </textarea>
+            <div id="nametag">
+                Todo By NameTage9012
+            </div>
+        </div>
+        <div class="todowindow">
+            <div class="toolbar">
+                <div class="complete">
+                    Done
+                    <input type="checkbox" id="completed">
+                </div>
+                <button><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+            
+            <div class="textdisplay">
+                i started prograaming in 2993 but now an not going where i can do better but you know i am the best in town so come lets
+            </div>
+        </div>
+    </div>
 
     
 </body>

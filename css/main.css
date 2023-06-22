@@ -56,7 +56,7 @@ body {
     padding: 50px;
     
     height: 100%;
-    width: 93%;
+    max-width: 95%;
     display: none;
 }
 .create {

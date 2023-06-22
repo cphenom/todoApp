@@ -31,6 +31,8 @@ submitBtn.addEventListener("click", () => {
     lastName = lastNameInput.value;
     id++;
 
+    let greeting = document.querySelector(".greeting");
+    greeting.innerText = `Hi ${firstName} ${lastName}`;
     let todoWindow = document.createElement("div");
     todoWindow.classList.add('todowindow');
     todoWindow.innerHTML = `
@@ -49,9 +51,6 @@ submitBtn.addEventListener("click", () => {
             <div class="marked" id="marked${id}">
                 <i class="fa-solid fa-circle-check"></i><div class="font10">DONE</div>
             </div>
-            
-            <!--<textarea class="textdisplay" id="textdisplay${id}" readonly >
-            </textarea>-->
             <div id="nametag">
                 Todo By ${firstName}
             </div>
@@ -105,8 +104,8 @@ submitBtn.addEventListener("click", () => {
     
     console.log("testing" + " "+ firstName + " " + lastName + " " + textArea);
 
-    firstNameInput.value = "";
-    lastNameInput.value = "";
+    // firstNameInput.value = "";
+    // lastNameInput.value = "";
     textAreaInput.value = "";
 
     createTodosEl.classList.remove("block");

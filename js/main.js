@@ -105,9 +105,12 @@ submitBtn.addEventListener("click", () => {
     
     console.log("testing" + " "+ firstName + " " + lastName + " " + textArea);
 
-    // firstNameInput.value = "";
-    // lastNameInput.value = "";
-    // textAreaInput.value = "";
+    firstNameInput.value = "";
+    lastNameInput.value = "";
+    textAreaInput.value = "";
+
+    createTodosEl.classList.remove("block");
+    displayTodosEl.classList.add("flex");
 
     console.log("End....");
 });

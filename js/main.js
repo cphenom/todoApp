@@ -9,6 +9,7 @@ const submitBtn = document.getElementById("submit");
 const textAreaInput = document.getElementById("textarea");
 let successLogo = document.getElementById("success-logo");
 let successMsg = document.getElementById("success-msg");
+let footer = document.getElementById("footer");
 let id = 0;
 
 
@@ -26,6 +27,52 @@ menuManage.addEventListener("click", () => {
     displayTodosEl.classList.add("flex");
     
 });
+
+function removeFooter(){
+    firstName = firstNameInput.value;
+    textArea = textAreaInput.value;
+    lastName = lastNameInput.value;
+
+    firstNameInput.addEventListener("click",() => {
+        footer.classList.add("hide");
+
+        firstNameInput.addEventListener("input",() => {
+            if (firstNameInput.value){
+                footer.classList.add("hide");
+            }
+            else{
+                footer.classList.remove("hide");
+            }  
+        });
+    });
+
+    lastNameInput.addEventListener("click",() => {
+        footer.classList.add("hide");
+
+        lastNameInput.addEventListener("input",() => {
+            if (lastNameInput.value){
+                footer.classList.add("hide");
+            }
+            else{
+                footer.classList.remove("hide");
+            }  
+        }); 
+    });
+
+    textAreaInput.addEventListener("click",() => {
+        footer.classList.add("hide");
+
+        textAreaInput.addEventListener("input",() => {
+            if (textAreaInput.value){
+                footer.classList.add("hide");
+            }
+            else{
+                footer.classList.remove("hide");
+            }  
+        }); 
+    });  
+}
+removeFooter();
 
 submitBtn.addEventListener("click", () => {
     firstName = firstNameInput.value;
@@ -87,6 +134,7 @@ submitBtn.addEventListener("click", () => {
             edit.classList.add("fa-bounce");
             textDisplay.removeAttribute("readonly");
             textDisplay.classList.add("edit-mode-bg");
+            footer.classList.add("hide");
         }
         else{
             edit.classList.remove("fa-bounce");
@@ -94,6 +142,7 @@ submitBtn.addEventListener("click", () => {
             edit.classList.add("fa-pen-to-square");
             textDisplay.setAttribute("readonly", "");
             textDisplay.classList.remove("edit-mode-bg");
+            footer.classList.remove("hide");
         }
         // edit.parentElement.innerHTML = `<i class="fa-solid fa-trash-can" id="edit${id}"></i>`;
         
@@ -126,6 +175,7 @@ console.log(successMsg);
     function removeSuccessLogo(){
         successLogo.classList.remove("block");
         successMsg.classList.add("block");
+        footer.classList.remove("hide");
     }
     setTimeout(removeSuccessLogo, 4000);
 // end of success display

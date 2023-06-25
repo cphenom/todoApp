@@ -7,7 +7,7 @@ body {
     max-width: 100vw;
     min-height: 100vh;
     background-color: rgb(172, 241, 241);
-    background-image: url(assests/images/bgimage.jpg);
+    background-image: url(/todoApp/assests/images/blueimage.jpg);
     background-position: center center;
     background-size:cover;
     overflow: hidden;

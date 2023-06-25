@@ -99,7 +99,9 @@ submitBtn.addEventListener("click", () => {
 
     let deleteBtn = document.getElementById(`delete${id}`);
     deleteBtn.addEventListener("click", function(){
-        deleteBtn.parentElement.parentElement.parentElement.remove();
+        if (confirm("Do you really want to delete this todo? if you delete it you can no longer get it back")){
+            deleteBtn.parentElement.parentElement.parentElement.remove();
+        };
     });
     
     console.log("testing" + " "+ firstName + " " + lastName + " " + textArea);

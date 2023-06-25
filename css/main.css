@@ -265,18 +265,17 @@ input:focus,textarea:focus,#submit {
     position: fixed;
     bottom: 0px;
     right: 0px;
-    height: 30%;
+    height: 15%;
     background-color: rgb(56, 5, 56);
     z-index: 2;
     box-shadow: 20px 1px 30px rgb(70, 60, 70);
-
+    font-size: smaller;
 }
 .top-footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 0px;
-    /* display: none; */
 }
 .about {
     text-align: justify;
@@ -311,7 +310,7 @@ input:focus,textarea:focus,#submit {
 .about {
     padding: 0px 20px 0px 20px;
 }
-.about h3, .team h3, .features h3, .team-founder h3 {
+.about h4, .team h4, .features h4, .team-founder h4 {
     padding: 20px 0px 10px 0px;
 }
 .copyright {
@@ -335,7 +334,7 @@ input:focus,textarea:focus,#submit {
     .founder span {
         padding: 0px 0px 0px 20px;
     }
-    .team-founder h3 {
+    .team-founder h4 {
         display: none !important;
     }
     .features {

@@ -329,10 +329,14 @@ input:focus,textarea:focus,#submit {
     .founder {
         min-width:300px;
         padding-left: 0% !important;
+        padding-top:20px;
         
     }
     .founder span {
         padding: 0px 0px 0px 20px;
+    }
+    .team-founder h3 {
+        display: none !important;
     }
     .features {
         min-width:250px;
@@ -352,14 +356,14 @@ input:focus,textarea:focus,#submit {
         z-index: 200;
         width:100%;
         overflow-y: scroll;
-        height: 30%;
+        height: 120px;
+        font-size: smaller;
     }
     .copyright{
         
-        height: 20px;
-        position: sticky;
-        bottom: 0px;
+        height: 30px;
     }
+
     
 }
 .block{
@@ -367,4 +371,7 @@ input:focus,textarea:focus,#submit {
 }
 .flex{
     display: flex !important;
+}
+.hide{
+    display: none;
 }

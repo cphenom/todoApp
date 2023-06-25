@@ -7,6 +7,8 @@ let firstNameInput = document.querySelector("#firstname");
 const lastNameInput = document.getElementById("lastname");
 const submitBtn = document.getElementById("submit");
 const textAreaInput = document.getElementById("textarea");
+let successLogo = document.getElementById("success-logo");
+let successMsg = document.getElementById("success-msg");
 let id = 0;
 
 
@@ -78,6 +80,7 @@ submitBtn.addEventListener("click", () => {
 
     let edit = document.getElementById(`edit${id}`);
     edit.addEventListener("click", function(){
+        
         if ( edit.classList.contains("fa-pen-to-square")){
             edit.classList.remove("fa-pen-to-square");
             edit.classList.add("fa-square-check");
@@ -94,7 +97,6 @@ submitBtn.addEventListener("click", () => {
         }
         // edit.parentElement.innerHTML = `<i class="fa-solid fa-trash-can" id="edit${id}"></i>`;
         
-        console.log("hello");
     });
 
     let deleteBtn = document.getElementById(`delete${id}`);
@@ -110,8 +112,23 @@ submitBtn.addEventListener("click", () => {
     // lastNameInput.value = "";
     textAreaInput.value = "";
 
-    createTodosEl.classList.remove("block");
-    displayTodosEl.classList.add("flex");
+    
+// displaying sucess logo for 3 secs
+// displaying success msg to add another todo
+// removing success msg if it exist before adding success logo
+console.log(successLogo);
+console.log(successMsg);
+    if ( successMsg.classList.contains("block")){
+        successMsg.classList.remove("block");
+    }
+    successLogo.classList.add("block");
 
-    console.log("End....");
+    function removeSuccessLogo(){
+        successLogo.classList.remove("block");
+        successMsg.classList.add("block");
+    }
+    setTimeout(removeSuccessLogo, 4000);
+// end of success display
+
+    console.log("submitted....");
 });

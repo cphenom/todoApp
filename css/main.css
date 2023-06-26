@@ -18,7 +18,7 @@ body {
     position: fixed;
     left: 0px;
     right: 0px;
-    opacity: 0.9;
+    /* opacity: 0.9; */
     top: 0px;
     height: 40px;
     z-index: 2;
@@ -55,10 +55,10 @@ body {
 .greeting {
     position: absolute;
     left: 50px;
-    bottom: -20px;
-    color: purple;
+    bottom: 1px;
+    color: antiquewhite;
     font-weight: bold;
-    font-size: large;
+    font-size: smaller;
 }
 .mainsection {
     padding: 50px;
@@ -150,7 +150,7 @@ input:focus,textarea:focus,#submit {
 #success-msg {
     margin-top: 30px;
     color: green;
-    padding: 0% 30% 0% 30%; 
+    padding: 0% 10% 0% 10%; 
     display: none;
     transition: .5s;
 }

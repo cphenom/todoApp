@@ -118,33 +118,44 @@ submitBtn.addEventListener("click", () => {
 
     let marked = document.getElementById(`marked${id}`);
 
+    let checker = false;
+
     let completedBtn = document.getElementById(`completed${id}`);
     completedBtn.addEventListener("click", function(){
         completedBtn.parentElement.parentElement.parentElement.lastChild.classList.toggle("line-through");
         
         marked.classList.toggle("block");
+        // this will toggle checker value between true and false on every click for complete to be used to know if to edit or not
+        if (checker === false){
+            return checker = true;
+        }else{
+            return checker = false;
+        }
     });
 
     let edit = document.getElementById(`edit${id}`);
     edit.addEventListener("click", function(){
         
-        if ( edit.classList.contains("fa-pen-to-square")){
-            edit.classList.remove("fa-pen-to-square");
-            edit.classList.add("fa-square-check");
-            edit.classList.add("fa-bounce");
-            textDisplay.removeAttribute("readonly");
-            textDisplay.classList.add("edit-mode-bg");
-            footer.classList.add("hide");
+        if (checker === false){
+
+            if ( edit.classList.contains("fa-pen-to-square")){
+                edit.classList.remove("fa-pen-to-square");
+                edit.classList.add("fa-square-check");
+                edit.classList.add("fa-bounce");
+                textDisplay.removeAttribute("readonly");
+                textDisplay.classList.add("edit-mode-bg");
+                footer.classList.add("hide");
+            }
+            else{
+                edit.classList.remove("fa-bounce");
+                edit.classList.remove("fa-square-check");
+                edit.classList.add("fa-pen-to-square");
+                textDisplay.setAttribute("readonly", "");
+                textDisplay.classList.remove("edit-mode-bg");
+                footer.classList.remove("hide");
+            }
+
         }
-        else{
-            edit.classList.remove("fa-bounce");
-            edit.classList.remove("fa-square-check");
-            edit.classList.add("fa-pen-to-square");
-            textDisplay.setAttribute("readonly", "");
-            textDisplay.classList.remove("edit-mode-bg");
-            footer.classList.remove("hide");
-        }
-        // edit.parentElement.innerHTML = `<i class="fa-solid fa-trash-can" id="edit${id}"></i>`;
         
     });
 

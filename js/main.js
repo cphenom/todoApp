@@ -10,8 +10,11 @@ const submitBtn = document.getElementById("submit");
 const textAreaInput = document.getElementById("textarea");
 let successLogo = document.getElementById("success-logo");
 let successMsg = document.getElementById("success-msg");
+let errLogo = document.getElementById("error-logo");
+let errMsg = document.getElementById("err-msg");
 let footer = document.getElementById("footer");
 let id = 0;
+let err;
 
 // input variable
 let firstName;
@@ -84,6 +87,41 @@ submitBtn.addEventListener("click", () => {
     textArea = textAreaInput.value;
     lastName = lastNameInput.value;
     id++;
+
+    if ((firstName==="") || (lastName==="") || (textArea==="")){
+        errLogo.classList.add("block");
+    }
+    else{
+        errLogo.classList.remove("block");
+    }
+
+    // if error exist clear the previous error to record new one then set error to false to check again
+    if (err===true){
+        errMsg.innerHTML="";
+    }
+    err = false;
+
+    if (firstName===""){
+        let firstNerrText = document.createElement("p");
+        firstNerrText.innerText = "Please type in your First Name";
+        errMsg.appendChild(firstNerrText);
+        err = true;
+    }
+    if (lastName===""){
+        let lastNerrText = document.createElement("p");
+        lastNerrText.innerText = "Please type in your Last Name";
+        errMsg.appendChild(lastNerrText);
+        err = true;
+    }
+    if (textArea===""){
+        let errText = document.createElement("p");
+        errText.innerText = "Please type in a TODO";
+        errMsg.appendChild(errText);
+        err = true;
+    }
+    if (err===true){
+        return;
+    }
 
     let greeting = document.querySelector(".greeting");
     greeting.innerText = `Hi ${firstName} ${lastName}`;
@@ -188,8 +226,8 @@ submitBtn.addEventListener("click", () => {
 // displaying sucess logo for 3 secs
 // displaying success msg to add another todo
 // removing success msg if it exist before adding success logo
-console.log(successLogo);
-console.log(successMsg);
+if (err===false){
+
     if ( successMsg.classList.contains("block")){
         successMsg.classList.remove("block");
     }
@@ -201,6 +239,9 @@ console.log(successMsg);
         footer.classList.remove("hide");
     }
     setTimeout(removeSuccessLogo, 4000);
+
+};
+    
 // end of success display
 
 // clearing the textarea on submiting todo

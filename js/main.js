@@ -1,4 +1,5 @@
 console.log("starting...");
+// hooking to dom
 const menuCreate = document.getElementById("menucreate");
 const menuManage = document.getElementById("menumanage");
 const createTodosEl = document.getElementById("createtodos");
@@ -12,22 +13,25 @@ let successMsg = document.getElementById("success-msg");
 let footer = document.getElementById("footer");
 let id = 0;
 
-
+// input variable
 let firstName;
 let lastName;
 let textArea;
 
+// create menu
 menuCreate.addEventListener("click", () => {
     createTodosEl.classList.add("block");
     displayTodosEl.classList.remove("flex");
     
 });
+// manage menu
 menuManage.addEventListener("click", () => {
     createTodosEl.classList.remove("block");
     displayTodosEl.classList.add("flex");
     
 });
 
+// removing footer on input mode
 function removeFooter(){
     firstName = firstNameInput.value;
     textArea = textAreaInput.value;
@@ -74,6 +78,7 @@ function removeFooter(){
 }
 removeFooter();
 
+// on clicking of submit button
 submitBtn.addEventListener("click", () => {
     firstName = firstNameInput.value;
     textArea = textAreaInput.value;
@@ -82,6 +87,7 @@ submitBtn.addEventListener("click", () => {
 
     let greeting = document.querySelector(".greeting");
     greeting.innerText = `Hi ${firstName} ${lastName}`;
+
     let todoWindow = document.createElement("div");
     todoWindow.classList.add('todowindow');
     todoWindow.innerHTML = `
@@ -120,12 +126,24 @@ submitBtn.addEventListener("click", () => {
 
     let checker = false;
 
+
+    let edit = document.getElementById(`edit${id}`);
     let completedBtn = document.getElementById(`completed${id}`);
     completedBtn.addEventListener("click", function(){
         completedBtn.parentElement.parentElement.parentElement.lastChild.classList.toggle("line-through");
         
         marked.classList.toggle("block");
         // this will toggle checker value between true and false on every click for complete to be used to know if to edit or not
+
+        if (edit.classList.contains("fa-square-check")){
+            edit.classList.remove("fa-bounce");
+            edit.classList.remove("fa-square-check");
+            edit.classList.add("fa-pen-to-square");
+            textDisplay.setAttribute("readonly", "");
+            textDisplay.classList.remove("edit-mode-bg");
+            footer.classList.remove("hide");
+        }
+
         if (checker === false){
             return checker = true;
         }else{
@@ -133,7 +151,6 @@ submitBtn.addEventListener("click", () => {
         }
     });
 
-    let edit = document.getElementById(`edit${id}`);
     edit.addEventListener("click", function(){
         
         if (checker === false){
@@ -168,11 +185,6 @@ submitBtn.addEventListener("click", () => {
     
     console.log("testing" + " "+ firstName + " " + lastName + " " + textArea);
 
-    // firstNameInput.value = "";
-    // lastNameInput.value = "";
-    textAreaInput.value = "";
-
-    
 // displaying sucess logo for 3 secs
 // displaying success msg to add another todo
 // removing success msg if it exist before adding success logo
@@ -191,5 +203,7 @@ console.log(successMsg);
     setTimeout(removeSuccessLogo, 4000);
 // end of success display
 
+// clearing the textarea on submiting todo
+textAreaInput.value = "";
     console.log("submitted....");
 });

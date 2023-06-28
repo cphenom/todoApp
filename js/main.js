@@ -209,48 +209,60 @@ function createAndManage(){
         textDisplay.setAttribute("readonly", "");
         textDisplay.setAttribute("maxlength", "130");
         textDisplay.classList.add("textdisplay");
-        textDisplay.innerText = todo.textArea;
+        textDisplay.textContent = todo.textArea;
         todoWindow.appendChild(textDisplay);
 
         // render todo window to display todos div on maange page (document)
         displayTodos.appendChild(todoWindow);
 
         window['marked' + todo.id] = document.getElementById(`marked${todo.id}`);
+
         window['textdisplay' + todo.id] = document.getElementById(`textdisplay${todo.id}`);
+
         window['edit' + todo.id] = document.getElementById(`edit${todo.id}`);
+
         window['completeBtn' + todo.id] = document.getElementById(`completed${todo.id}`);
+
         window['completeBtn' + todo.id].addEventListener("click", function(){
 
             // this will toggle checker value between true and false on every click for complete to be used to know if to edit or not toggle complete properties
-
-            function complete(){
-    
-                if (todo.checker === false){
-                    window['textdisplay' + todo.id].classList.add("line-through");
-                    window['marked' + todo.id].classList.add("block");
-                    if (window['edit' + todo.id].classList.contains("fa-square-check")){
-                        window['edit' + todo.id].classList.remove("fa-bounce");
-                        window['edit' + todo.id].classList.remove("fa-square-check");
-                        window['edit' + todo.id].classList.add("fa-pen-to-square");
-                        window['textdisplay' + todo.id].setAttribute("readonly", "");
-                        window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
-                        footer.classList.remove("hide");
-                    }
-                    todo.checker = true;
-                }else{
-                    window['textdisplay' + todo.id].classList.remove("line-through");
             
-                    window['marked' + todo.id].classList.remove("block");
-                    todo.checker = false;
-                };
+            if (todo.checker === false){
+                todo.checker = true;
+                window['textdisplay' + todo.id].classList.add("line-through");
+                window['marked' + todo.id].classList.add("block");
+                if (window['edit' + todo.id].classList.contains("fa-square-check")){
+                    window['edit' + todo.id].classList.remove("fa-bounce");
+                    window['edit' + todo.id].classList.remove("fa-square-check");
+                    window['edit' + todo.id].classList.add("fa-pen-to-square");
+                    window['textdisplay' + todo.id].setAttribute("readonly", "");
+                    window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
+                    footer.classList.remove("hide");
+                 
+                    // store edited text and render new todo to screen
+                    console.log(window['textdisplay' + todo.id].value);
+                    todo.textArea = window['textdisplay' + todo.id].value;
+    
+                    storeTodos();
+                    createAndManage();
+                    console.log(todo.textArea);
+                    console.log(editMode);
+                }
+                
+            }else{
+                todo.checker = false;
+                window['textdisplay' + todo.id].classList.remove("line-through");
+        
+                window['marked' + todo.id].classList.remove("block");
+                
             };
-            complete();
+
             storeTodos();
             
         });
-    
-        window['edit' + todo.id].addEventListener("click", function(){
 
+        window['edit' + todo.id].addEventListener("click", function(){
+            editMode = false;
             if (todo.checker === false){
 
                 if ( window['edit' + todo.id].classList.contains("fa-pen-to-square")){
@@ -260,6 +272,7 @@ function createAndManage(){
                     window['textdisplay' + todo.id].removeAttribute("readonly");
                     window['textdisplay' + todo.id].classList.add("edit-mode-bg");
                     footer.classList.add("hide");
+                    editMode = false;
                 }
                 else{
                     window['edit' + todo.id].classList.remove("fa-bounce");
@@ -268,17 +281,20 @@ function createAndManage(){
                     window['textdisplay' + todo.id].setAttribute("readonly", "");
                     window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
                     footer.classList.remove("hide");
+                    editMode = true;
                 };
 
+            }
+            console.log(editMode);
+            if(editMode === true) {
+
+                console.log(window['textdisplay' + todo.id].value);
+                todo.textArea = window['textdisplay' + todo.id].value;
+
+                storeTodos();
+                createAndManage();
             };
 
-        
-            // todos.forEach((todo) => {
-
-                
-
-            // });
-            // createAndManage();
         });
 
         deleteBtn = document.getElementById(`delete${todo.id}`);
@@ -297,11 +313,55 @@ function createAndManage(){
                 createAndManage();
             };
         });
+        function completedTodo(){
+            
+            if (todo.checker === true){
+                window['completeBtn' + todo.id].checked = true;
+                window['textdisplay' + todo.id].classList.add("line-through");
+                window['marked' + todo.id].classList.add("block");
+                if (window['edit' + todo.id].classList.contains("fa-square-check")){
+                    window['edit' + todo.id].classList.remove("fa-bounce");
+                    window['edit' + todo.id].classList.remove("fa-square-check");
+                    window['edit' + todo.id].classList.add("fa-pen-to-square");
+                    window['textdisplay' + todo.id].setAttribute("readonly", "");
+                    window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
+                    footer.classList.remove("hide");
+                }
+            }else{
+                window['completeBtn' + todo.id].checked = false;
+                window['textdisplay' + todo.id].classList.remove("line-through");
         
+                window['marked' + todo.id].classList.remove("block");
+            };
+            
+        };
+        completedTodo();
     });
     
     
 };
+
+// function complete(){
+    
+//     if (todo.checker === false){
+//         window['textdisplay' + todo.id].classList.add("line-through");
+//         window['marked' + todo.id].classList.add("block");
+//         if (window['edit' + todo.id].classList.contains("fa-square-check")){
+//             window['edit' + todo.id].classList.remove("fa-bounce");
+//             window['edit' + todo.id].classList.remove("fa-square-check");
+//             window['edit' + todo.id].classList.add("fa-pen-to-square");
+//             window['textdisplay' + todo.id].setAttribute("readonly", "");
+//             window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
+//             footer.classList.remove("hide");
+//         }
+//         todo.checker = true;
+//     }else{
+//         window['textdisplay' + todo.id].classList.remove("line-through");
+
+//         window['marked' + todo.id].classList.remove("block");
+//         todo.checker = false;
+//     };
+// };
 
 // this will update local storage with updated todos array
 function storeTodos(){

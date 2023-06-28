@@ -341,28 +341,6 @@ function createAndManage(){
     
 };
 
-// function complete(){
-    
-//     if (todo.checker === false){
-//         window['textdisplay' + todo.id].classList.add("line-through");
-//         window['marked' + todo.id].classList.add("block");
-//         if (window['edit' + todo.id].classList.contains("fa-square-check")){
-//             window['edit' + todo.id].classList.remove("fa-bounce");
-//             window['edit' + todo.id].classList.remove("fa-square-check");
-//             window['edit' + todo.id].classList.add("fa-pen-to-square");
-//             window['textdisplay' + todo.id].setAttribute("readonly", "");
-//             window['textdisplay' + todo.id].classList.remove("edit-mode-bg");
-//             footer.classList.remove("hide");
-//         }
-//         todo.checker = true;
-//     }else{
-//         window['textdisplay' + todo.id].classList.remove("line-through");
-
-//         window['marked' + todo.id].classList.remove("block");
-//         todo.checker = false;
-//     };
-// };
-
 // this will update local storage with updated todos array
 function storeTodos(){
     // store all updated todo in todos to the local storage
@@ -400,108 +378,18 @@ function loadLSTodos(){
 
     if (todos.length > 0){
         window.addEventListener("onunload",createAndManage());
+        todos = JSON.parse(localStorage.getItem("todos"));
+        todos.forEach(todo => {
+            if ( todos[todos.length-1] ){
+                firstName = todo.firstName;
+                lastName = todo.lastName;
+                firstNameInput.value = todo.firstName;
+                lastNameInput.value = todo.lastName;
+
+                greet();
+            };
+        });
+        
     };
 };
 loadLSTodos();
-
-function createAndManageTesting(){
-    let savedtodos = JSON.parse(localStorage.getItem("todos"));
-    if (Array.isArray(savedtodos)){
-        console.log(savedtodos);
-        console.log("test123");
-    }
-    
-    let todoWindow = document.createElement("div");
-    todoWindow.classList.add('todowindow');
-    todoWindow.innerHTML = `
-        <div class="toolbar">
-            <div class="complete">
-                <input type="checkbox" id="completed${id}">
-            </div>
-            
-            <button>
-                <i class="fa-solid fa-pen-to-square" id="edit${id}"></i>
-            </button>
-            <button>
-                <i class="fa-solid fa-trash-can" id="delete${id}"></i>
-            </button>
-            </div>
-            <div class="marked" id="marked${id}">
-                <i class="fa-solid fa-circle-check"></i><div class="font10">DONE</div>
-            </div>
-            <div id="nametag">
-                Todo By ${firstName}
-            </div>
-        </div>
-    `
-    let textDisplay = document.createElement("textarea");
-    textDisplay.setAttribute("id", `textdisplay${id}`);
-    textDisplay.setAttribute("readonly", "");
-    textDisplay.setAttribute("maxlength", "130");
-    textDisplay.classList.add("textdisplay");
-    textDisplay.innerText = textArea;
-    todoWindow.appendChild(textDisplay);
-
-    // render todo window to display todos div on maange page (document)
-    let displayTodos = document.getElementById(`displaytodos`);
-    displayTodos.appendChild(todoWindow);
-
-    let marked = document.getElementById(`marked${id}`);
-
-    let edit = document.getElementById(`edit${id}`);
-    let completedBtn = document.getElementById(`completed${id}`);
-    completedBtn.addEventListener("click", function(){
-        completedBtn.parentElement.parentElement.parentElement.lastChild.classList.toggle("line-through");
-        
-        marked.classList.toggle("block");
-        // this will toggle checker value between true and false on every click for complete to be used to know if to edit or not
-
-        if (edit.classList.contains("fa-square-check")){
-            edit.classList.remove("fa-bounce");
-            edit.classList.remove("fa-square-check");
-            edit.classList.add("fa-pen-to-square");
-            textDisplay.setAttribute("readonly", "");
-            textDisplay.classList.remove("edit-mode-bg");
-            footer.classList.remove("hide");
-        }
-
-        if (checker === false){
-            return checker = true;
-        }else{
-            return checker = false;
-        }
-    });
-
-    edit.addEventListener("click", function(){
-        
-        if (checker === false){
-
-            if ( edit.classList.contains("fa-pen-to-square")){
-                edit.classList.remove("fa-pen-to-square");
-                edit.classList.add("fa-square-check");
-                edit.classList.add("fa-bounce");
-                textDisplay.removeAttribute("readonly");
-                textDisplay.classList.add("edit-mode-bg");
-                footer.classList.add("hide");
-            }
-            else{
-                edit.classList.remove("fa-bounce");
-                edit.classList.remove("fa-square-check");
-                edit.classList.add("fa-pen-to-square");
-                textDisplay.setAttribute("readonly", "");
-                textDisplay.classList.remove("edit-mode-bg");
-                footer.classList.remove("hide");
-            }
-
-        }
-        
-    });
-
-    let deleteBtn = document.getElementById(`delete${id}`);
-    deleteBtn.addEventListener("click", function(){
-        if (confirm("Do you really want to delete this todo? if you delete it you can no longer get it back")){
-            deleteBtn.parentElement.parentElement.parentElement.remove();
-        };
-    });
-    storeTodos();
-};
